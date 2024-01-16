@@ -3,19 +3,20 @@ import { Button, Text, StyleSheet, View } from "react-native";
 import AddTask from "./AddTask";
 import { randomUUID } from 'expo-crypto';
 
-const ToDoList = () => {
-    const [toDos, setToDos] = useState(
-        /**
-         * @type {{id: string, title: string}[]}
-         */
-        ([]))
+/**
+ * 
+ * @param {{initialValues: string[]}} props 
+ * @returns 
+ */
+const ToDoList = ({ initialValues }) => {
+    const [toDos, setToDos] = useState(initialValues.map((title) => ({ id: randomUUID(), title })))
 
-        /**
-         * 
-         * @param {string} title 
-         * @returns 
-         */
-    const addToDo = (title) => 
+    /**
+     * 
+     * @param {string} title 
+     * @returns 
+     */
+    const addToDo = (title) =>
         setToDos([...toDos, { id: randomUUID(), title }])
 
     /**
@@ -23,7 +24,7 @@ const ToDoList = () => {
      * @param {string} id 
      * @returns 
      */
-    const removeToDo = (id) => 
+    const removeToDo = (id) =>
         setToDos(toDos.filter((todo) => todo.id !== id))
 
     return (
@@ -41,17 +42,17 @@ const ToDoList = () => {
 
 const styles = StyleSheet.create({
     todoListContainer: {
-      margin: 10,
+        margin: 10,
     },
     todoItem: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      padding: 10,
-      marginVertical: 5,
-      borderColor: 'gray',
-      borderWidth: 1,
-      borderRadius: 5,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: 10,
+        marginVertical: 5,
+        borderColor: 'gray',
+        borderWidth: 1,
+        borderRadius: 5,
     },
 });
 
